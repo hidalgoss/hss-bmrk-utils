@@ -1,13 +1,48 @@
-
 # Create Library
 #---------------------------------------------------#
-ADD_LIBRARY(hss_bmrk_utils SHARED 
+SET(CMAKE_CONFIGURATION_TYPES "Debug;Release;RelWithDebInfo"
+    CACHE STRING "Configs" FORCE
+)
+
+SET(HEADER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/include/hss_bmrk_utils.h
+)
+
+ADD_LIBRARY(hss_bmrk_utils SHARED 
+    ${HEADER_FILES}
     )
 
-TARGET_INCLUDE_DIRECTORIES(hss_bmrk_utils
-    PRIVATE
+TARGET_INCLUDE_DIRECTORIES(hss_bmrk_utils PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     )
 
-SET_TARGET_PROPERTIES(hss_bmrk_utils PROPERTIES LINKER_LANGUAGE CXX)
+SET_TARGET_PROPERTIES(hss_bmrk_utils PROPERTIES
+    LINKER_LANGUAGE CXX
+    PUBLIC_HEADER "${HEADER_FILES}"
+)
+
+# Install steps.
+#---------------------------------------------------#
+install(TARGETS hss_bmrk_utils
+    CONFIGURATIONS Debug
+    PUBLIC_HEADER DESTINATION "debug/${CMAKE_INSTALL_INCLUDEDIR}/"
+    LIBRARY DESTINATION "debug/${CMAKE_INSTALL_LIBDIR}/"
+    ARCHIVE DESTINATION "debug/${CMAKE_INSTALL_LIBDIR}/"
+    RUNTIME DESTINATION "debug/${CMAKE_INSTALL_LIBDIR}/"
+ )
+
+install(TARGETS hss_bmrk_utils
+    CONFIGURATIONS RelWithDebInfo
+    PUBLIC_HEADER DESTINATION "relWithDebInfo/${CMAKE_INSTALL_INCLUDEDIR}/"
+    LIBRARY DESTINATION "relWithDebInfo/${CMAKE_INSTALL_LIBDIR}/"
+    ARCHIVE DESTINATION "relWithDebInfo/${CMAKE_INSTALL_LIBDIR}/"
+    RUNTIME DESTINATION "relWithDebInfo/${CMAKE_INSTALL_LIBDIR}/"
+ )
+
+install(TARGETS hss_bmrk_utils
+    CONFIGURATIONS Release
+    PUBLIC_HEADER DESTINATION "release/${CMAKE_INSTALL_INCLUDEDIR}/"
+    LIBRARY DESTINATION "release/${CMAKE_INSTALL_LIBDIR}/"
+    ARCHIVE DESTINATION "release/${CMAKE_INSTALL_LIBDIR}/"
+    RUNTIME DESTINATION "release/${CMAKE_INSTALL_LIBDIR}/"
+)
