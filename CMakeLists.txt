@@ -8,7 +8,7 @@ SET(HEADER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/include/hss_bmrk_utils.h
 )
 
-ADD_LIBRARY(hss_bmrk_utils SHARED 
+ADD_LIBRARY(hss_bmrk_utils
     ${HEADER_FILES}
     )
 
