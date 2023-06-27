@@ -1,29 +1,28 @@
+cmake_minimum_required (VERSION 3.4)
+PROJECT(hss_bmrk_utils)
+
 # Create Library
 #---------------------------------------------------#
-SET(CMAKE_CONFIGURATION_TYPES "Debug;Release;RelWithDebInfo"
-    CACHE STRING "Configs" FORCE
-)
-
 SET(HEADER_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/include/hss_bmrk_utils.h
 )
 
-ADD_LIBRARY(hss_bmrk_utils
+ADD_LIBRARY(${PROJECT_NAME}
     ${HEADER_FILES}
     )
 
-TARGET_INCLUDE_DIRECTORIES(hss_bmrk_utils PRIVATE
+TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     )
 
-SET_TARGET_PROPERTIES(hss_bmrk_utils PROPERTIES
+SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES
     LINKER_LANGUAGE CXX
     PUBLIC_HEADER "${HEADER_FILES}"
 )
 
 # Install steps.
 #---------------------------------------------------#
-install(TARGETS hss_bmrk_utils
+install(TARGETS ${PROJECT_NAME}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/
