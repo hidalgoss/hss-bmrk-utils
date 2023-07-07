@@ -1,5 +1,10 @@
 cmake_minimum_required (VERSION 3.4)
-PROJECT(hss_bmrk_utils)
+IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+    SET(PROJ_BMRK_UTILS hss_bmrk_utilsd)
+ELSE()
+    SET(PROJ_BMRK_UTILS hss_bmrk_utils)
+ENDIF()
+PROJECT(${PROJ_BMRK_UTILS})
 
 # Create Library
 #---------------------------------------------------#
@@ -27,4 +32,5 @@ install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/
     RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}/
+    BUNDLE DESTINATION ${CMAKE_INSTALL_LIBDIR}/
  )
